@@ -1,0 +1,29 @@
+Padrão Feature-Based
+src/
+├── app/                  # Rotas do Next.js (App Router)
+│   ├── (auth)/           # Grupo de rotas de autenticação
+│   ├── products/         # Rota de listagem de produtos
+│   └── layout.tsx        # Layout global (Navbar, Footer)
+│
+├── features/             # O CORAÇÃO DO PROJETO
+│   ├── auth/             # Tudo sobre autenticação
+│   │   ├── components/   # LoginForm, RegisterForm
+│   │   ├── hooks/        # useAuth, useSession
+│   │   ├── services/     # api.ts (chamadas ao backend .NET)
+│   │   ├── types/        # user.d.ts
+│   │   └── index.ts      # "Public API" da feature
+│   │
+│   ├── cart/             # Tudo sobre o carrinho de compras
+│   │   ├── components/   # CartDrawer, CartItem
+│   │   └── store/        # Gerenciamento de estado (Zustand/Redux)
+│   │
+│   └── portfolio-hero/   # Seção principal do seu site de exibição
+│
+├── components/           # Componentes GLOBAIS e GENÉRICOS
+│   ├── ui/               # Botões, Inputs, Cards (padrão shadcn/ui)
+│   └── common/           # Navbar, Footer, Feedback de erro
+│
+├── hooks/                # Hooks GLOBAIS (ex: useDebounce, useLocalStorage)
+├── lib/                  # Configurações de libs externas (Axios, Prisma, Stripe)
+├── styles/               # CSS Global e configurações do Tailwind
+└── types/                # Tipagens globais do TypeScript
