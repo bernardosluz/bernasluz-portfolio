@@ -20,11 +20,6 @@ export const Hero = () => {
         className="max-w-4xl mx-auto w-full"
       >
         <header className="space-y-4">
-          <div className="flex items-center gap-2 text-blue-400 font-mono text-sm">
-            <Terminal size={16} />
-            <span>system.init(bernasluz)</span>
-          </div>
-          
           <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-white">
             {siteConfig.name}
           </h1>
