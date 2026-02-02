@@ -1,0 +1,43 @@
+/* Efeito de transição suave para os itens do menu */
+.nav-item-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Um brilho sutil lateral para indicar o item ativo */
+.active-indicator {
+  position: relative;
+}
+
+.active-indicator::before {
+  content: "";
+  position: absolute;
+  left: -24px; /* Alinhado com o padding da Sidebar */
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #3b82f6; /* Azul primário */
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+/* Efeito de "vidro" caso queira uma sidebar levemente transparente */
+.sidebar-glass {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilização da barra de rolagem da sidebar (scrollbar) */
+aside::-webkit-scrollbar {
+  width: 5px;
+}
+
+aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
+}
