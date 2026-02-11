@@ -12,6 +12,7 @@ interface MenuItem {
   label: string;
   path: string;
   disabled: boolean;
+  newTab?: boolean;
 }
 
 export default function Sidebar() {
@@ -24,6 +25,7 @@ export default function Sidebar() {
   // Lista de itens do menu
   const menuItems: MenuItem[] = [
     { label: "Sobre Mim", path: "/", disabled: false },
+    { label: "Estudo", path: "/estudo/index.html", disabled: false, newTab: true },
     { label: "Projetos", path: "/projects", disabled: true },
     { label: "Habilidades", path: "/skills", disabled: true },
     { label: "TCC", path: "/tcc", disabled: true },
@@ -39,16 +41,7 @@ export default function Sidebar() {
       {/* ════════════════════════════════════════════════════════════════════
           BOTÃO HAMBÚRGUER
           ════════════════════════════════════════════════════════════════════
-          IMPORTANTE: Classes em UMA LINHA para evitar "hydration mismatch"
-          
-          O erro acontecia porque:
-          - Servidor: gerava HTML com quebras de linha (\n) nas classes
-          - Cliente: processava as classes de forma diferente
-          
           Next.js compara o HTML do servidor com o do cliente.
-          Se forem diferentes = ERRO!
-          
-          Solução: classes sempre em uma linha só, sem quebras
       */}
       <button
         onClick={toggleSidebar}
@@ -113,6 +106,22 @@ export default function Sidebar() {
                   ? "bg-blue-600/20 text-blue-400 active-indicator"
                   : "text-slate-300 hover:bg-slate-800 hover:text-white"
             }`;
+
+            // Use a plain <a> when we want to open in a new tab (reliably opens static files)
+            if (item.newTab && !item.disabled) {
+              return (
+                <a
+                  key={item.path}
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className={linkClasses}
+                >
+                  <span className="font-medium">{item.label}</span>
+                </a>
+              );
+            }
 
             return (
               <Link
