@@ -25,7 +25,7 @@ export default function Sidebar() {
   // Lista de itens do menu
   const menuItems: MenuItem[] = [
     { label: "Sobre Mim", path: "/", disabled: false },
-    { label: "Estudo", path: "/estudo/index.html", disabled: false, newTab: true },
+    { label: "Estudo", path: "/estudo/index.html", disabled: false, newTab: false },
     { label: "Projetos", path: "/projects", disabled: true },
     { label: "Habilidades", path: "/skills", disabled: true },
     { label: "TCC", path: "/tcc", disabled: true },
