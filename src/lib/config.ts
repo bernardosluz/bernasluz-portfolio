@@ -1,3 +1,12 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// CONFIG.TS — Dados centralizados do site
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// POR QUE CENTRALIZAR?
+// Se o nome, bio ou link mudar, você altera SÓ AQUI.
+// Todos os componentes que usam siteConfig pegam automaticamente.
+// Sem config centralizado, você teria que caçar strings espalhadas pelo projeto.
+
 export const siteConfig = {
   name: "Bernardo Luz",
   role: "Engenheiro de Computação",
@@ -11,6 +20,7 @@ export const siteConfig = {
   links: {
     github: "https://github.com/bernardosluz",
     linkedin: "https://www.linkedin.com/in/bernardo-silva-luz-740979248/",
+    instagram: "https://www.instagram.com/bernasluz",
     email: "mailto:contato@bernasluz.com.br",
   },
   projects: [

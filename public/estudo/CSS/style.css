@@ -10,3 +10,67 @@ h3 {
 p {
   color: rgb(43, 226, 52);
 }
+
+/* classes */
+.paragraph {
+  background-color: black;
+  color: aqua;
+  padding: 5px;
+}
+
+/* ids */
+#exclusive-title {
+  background-color: purple;
+  color: yellow;
+  padding: 10px;
+  font-size: 40px;
+}
+
+/* ordem das regras */
+h2 {
+  border-bottom: 2px solid red;
+}
+.titulo {
+  border-bottom: 3px solid blue;
+}
+
+#algum-titulo {
+  border-bottom: 4px solid orange;
+}
+
+/* Nome de cores */
+.color-name {
+  color: firebrick;
+}
+
+/* Hex */
+.hex {
+  color: #55a398;
+}
+
+.hex-2 {
+  color: #248ce0;
+}
+
+/* Aprofundo hex */
+.simple-hex {
+  color: #aa55ff;
+}
+
+.simple-hex-2 {
+  color: #a5f;
+}
+
+/* RGB */
+.rgb {
+  color: rgb(255, 0, 0);
+}
+
+.mixed-rgb {
+  color: rgb(75, 75, 120);
+}
+
+.rgba {
+  color: rgba(200, 40, 75, 0.3);
+  font-size: 30px;
+}

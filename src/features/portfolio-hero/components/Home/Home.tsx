@@ -1,3 +1,14 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// HOME — Composição da página principal
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// ESPAÇAMENTO ENTRE SEÇÕES:
+// A separação visual vem do padding generoso de cada seção, não de linhas.
+// - BannerHero: pb-24/32 (espaço embaixo)
+// - AboutSection: py-24/36 (espaço em cima e embaixo)
+// - ProjectsCarousel: py-24/36 (espaço em cima e embaixo)
+// O espaço vazio entre módulos é suficiente para o olho perceber a separação.
+
 import BannerHero from "../BannerHero/BannerHero";
 import AboutSection from "../AboutSection/AboutSection";
 import ProjectsCarousel from "../ProjectsCarousel/ProjectsCarousel";
@@ -7,22 +18,11 @@ export function Home() {
     <>
       <BannerHero />
       <AboutSection />
-
-      {/* Separador — agora usa variável do tema */}
-      <div className="max-w-5xl mx-auto px-6">
-        <div
-          className="h-px"
-          style={{
-            background: `linear-gradient(to right, transparent, var(--separator), transparent)`,
-          }}
-        />
-      </div>
-
       <ProjectsCarousel />
 
-      <footer className="py-12 px-6 text-center">
-        <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-          © 2025 Bernardo Luz — Feito com Next.js e Framer Motion
+      <footer className="py-16 px-5 text-center">
+        <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+          © 2025 Bernardo Luz — Next.js + Framer Motion
         </p>
       </footer>
     </>

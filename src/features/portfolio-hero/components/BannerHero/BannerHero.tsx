@@ -1,25 +1,33 @@
 // ═══════════════════════════════════════════════════════════════════════════════
-// BANNER HERO - TEMA-AWARE
+// BANNER HERO — Imagem em cima, informações embaixo
 // ═══════════════════════════════════════════════════════════════════════════════
 //
-// MUDANÇA PARA TEMAS:
-// Antes: cores fixas do Tailwind (text-white, bg-slate-950, text-amber-500)
-// Agora: CSS variables que mudam conforme o tema
+// NOVO LAYOUT:
+// ┌──────────────────────┐
+// │                      │
+// │   IMAGEM (parallax)  │  ← 65vh no mobile, 70vh no desktop
+// │                      │
+// │ ░░ gradiente fade ░░ │  ← transição suave para o fundo
+// ├──────────────────────┤
+// │  Bernardo Luz         │
+// │  Eng. Computação / UFS│
+// │  📍 Aracaju, SE      │
+// │  [gh] [li] [ig]      │  ← ícones sociais
+// └──────────────────────┘
 //
-// Em vez de "text-white" usamos style={{ color: "var(--text-primary)" }}
-// Em vez de "bg-amber-500" usamos style={{ background: "var(--accent)" }}
-//
-// POR QUE INLINE STYLES PARA CORES?
-// O Tailwind não conhece nossas variáveis CSS customizadas nativamente.
-// Poderíamos configurar no tailwind.config.js, mas inline styles com var()
-// é mais direto e funciona sem configuração extra.
-// Classes de LAYOUT (flex, px-6, rounded-full) continuam do Tailwind normalmente.
+// POR QUE ABAIXO DA IMAGEM?
+// - Na web com tela larga, texto sobre imagem escura nem sempre é legível
+// - Separar imagem e texto garante contraste perfeito em qualquer tema
+// - No mobile fica mais limpo — scroll natural de cima para baixo
 
 "use client";
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Github, Linkedin, MapPin } from "lucide-react";
+import { Github, Linkedin, Instagram, MapPin } from "lucide-react";
+// Instagram → novo ícone importado do lucide-react
+// lucide-react tem +1000 ícones, importar individualmente = tree-shaking
+// (só o código dos ícones usados vai pro bundle final)
 import { siteConfig } from "@/lib/config";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
@@ -33,149 +41,127 @@ export default function BannerHero() {
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  // Parallax mais sutil (10%) — imagem se move devagar ao scrollar
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  // Zoom sutil de 1x → 1.05x no scroll
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full min-h-screen overflow-hidden"
-    >
-      {/* Imagem com parallax */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ y: imageY, scale: imageScale }}
-      >
-        <img
-          src={BANNER_IMAGE}
-          alt="Bernardo Luz - Ilustração estilo lofi"
-          className="w-full h-full object-cover object-top"
-        />
-      </motion.div>
-
-      {/* Gradientes — agora usam variáveis CSS do tema */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(to bottom, transparent, var(--gradient-hero-mid), var(--gradient-hero-end))`,
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(to right, var(--gradient-hero-mid), transparent, var(--gradient-hero-mid))`,
-        }}
-      />
-
-      {/* Conteúdo */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-16 md:pb-20"
-        style={{ opacity: contentOpacity }}
-      >
+    <section ref={sectionRef}>
+      {/* ─── BLOCO DA IMAGEM ─── */}
+      {/* Ocupa 65% da viewport no mobile, 70% no desktop */}
+      {/* relative + overflow-hidden = o parallax não vaza pra fora */}
+      <div className="relative h-[65svh] md:h-[70vh] overflow-hidden">
+        {/* Imagem com parallax */}
         <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl mx-auto"
+          className="absolute inset-0"
+          style={{ y: imageY, scale: imageScale }}
         >
+          <img
+            src={BANNER_IMAGE}
+            alt="Bernardo Luz - Ilustração estilo lofi"
+            className="w-full h-full object-cover object-[center_20%]"
+          />
+        </motion.div>
+
+        {/* Gradiente na base — faz a imagem "derreter" no fundo da página */}
+        {/* Esse gradiente é o que cria a transição suave entre imagem e conteúdo */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to bottom, transparent 40%, var(--bg-primary) 100%)`,
+          }}
+        />
+
+        {/* Gradiente lateral sutil — vinheta nas bordas */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `radial-gradient(ellipse at center, transparent 50%, var(--bg-primary) 100%)`,
+          }}
+        />
+      </div>
+
+      {/* ─── BLOCO DO CONTEÚDO ─── */}
+      {/* mt negativo puxa o conteúdo pra cima, sobrepondo levemente o gradiente */}
+      {/* Isso elimina a "quebra" visual entre imagem e texto */}
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+        className="-mt-16 relative z-10 px-5 sm:px-8 pb-24 md:pb-32"
+        // -mt-16 = sobe 4rem, sobrepõe a área do gradiente
+        // pb-24/32 = espaço generoso embaixo → separa visualmente do About
+      >
+        <div className="max-w-3xl mx-auto">
+          {/* Nome */}
           <motion.h1
             variants={fadeInUp}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-none"
             style={{ color: "var(--text-primary)" }}
           >
             {siteConfig.name}
           </motion.h1>
 
-          <motion.h2
+          {/* Role / Universidade */}
+          <motion.p
             variants={fadeInUp}
-            className="mt-3 text-xl md:text-2xl font-light"
+            className="mt-4 text-lg sm:text-xl md:text-2xl font-light"
             style={{ color: "var(--text-secondary)" }}
           >
             {siteConfig.role}
             <span
-              className="mx-3"
-              style={{ color: "var(--accent)", opacity: 0.5 }}
+              className="mx-2 opacity-40"
+              style={{ color: "var(--accent)" }}
             >
-              •
+              /
             </span>
             {siteConfig.university}
-          </motion.h2>
+          </motion.p>
 
+          {/* Localização */}
           <motion.div
             variants={fadeInUp}
-            className="mt-4 flex items-center gap-2 text-sm"
+            className="mt-3 flex items-center gap-2 text-base"
             style={{ color: "var(--text-secondary)" }}
           >
-            <MapPin size={14} style={{ color: "var(--accent)" }} />
+            <MapPin size={16} style={{ color: "var(--accent)" }} />
             <span>{siteConfig.location}</span>
           </motion.div>
 
+          {/* ─── Links sociais ─── */}
           <motion.div
             variants={fadeInUp}
-            className="mt-8 flex flex-wrap gap-4 items-center"
+            className="mt-8 flex items-center gap-3"
           >
-            {/* Botão CTA */}
             <a
-              href={siteConfig.links.email}
-              className="group relative px-7 py-3 rounded-full font-semibold text-sm overflow-hidden transition-all duration-300"
-              style={{
-                background: "var(--accent)",
-                color: "var(--bg-primary)",
-                boxShadow: "0 10px 25px var(--accent-muted)",
-              }}
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-icon"
+              aria-label="GitHub"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              <span className="relative z-10">Entrar em contato</span>
+              <Github size={20} />
             </a>
-
-            {/* Ícones sociais */}
-            <div className="flex items-center gap-3">
-              <a
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-full transition-all duration-300"
-                style={{
-                  background: "var(--btn-social-bg)",
-                  border: "1px solid var(--btn-social-border)",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                <Github size={20} />
-              </a>
-              <a
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-full transition-all duration-300"
-                style={{
-                  background: "var(--btn-social-bg)",
-                  border: "1px solid var(--btn-social-border)",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                <Linkedin size={20} />
-              </a>
-            </div>
+            <a
+              href={siteConfig.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-icon"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={20} />
+            </a>
+            <a
+              href={siteConfig.links.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-icon"
+              aria-label="Instagram"
+            >
+              <Instagram size={20} />
+            </a>
           </motion.div>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div
-          className="w-6 h-10 rounded-full flex justify-center pt-2"
-          style={{ border: "2px solid var(--border)" }}
-        >
-          <div
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ background: "var(--accent)" }}
-          />
         </div>
       </motion.div>
     </section>

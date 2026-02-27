@@ -1,17 +1,15 @@
 /* ═══════════════════════════════════════════════════════════════════════════════
-   GLOBALS.CSS - ESTILOS GLOBAIS COM TEMA DUPLO (ESCURO / CLARO)
+   GLOBALS.CSS — SISTEMA DE DESIGN MINIMALISTA
    ═══════════════════════════════════════════════════════════════════════════════
    
-   SISTEMA DE TEMAS:
-   O ThemeProvider.tsx adiciona class="dark" ou class="light" no <html>.
-   Aqui definimos variáveis CSS diferentes para cada classe.
-   Todos os componentes usam var(--nome) → mudam automaticamente!
+   FILOSOFIA:
+   - Tema claro: fundo branco, texto preto
+   - Tema escuro: fundo preto, texto branco  
+   - Acento cobre como única cor de destaque
+   - Classes modulares (.card, .badge, .btn-*) reutilizáveis em qualquer componente
    
-   PALETA "LOFI WARM" — inspirada na foto:
-   - Marrons quentes (madeira, estante, mesa)
-   - Cobre/Âmbar (luz da luminária)
-   - Creme/Bege (luz do entardecer pela janela)
-   - Verde sutil (luminária, planta)
+   O ThemeProvider.tsx controla qual classe (dark/light) está no <html>.
+   Todas as variáveis mudam automaticamente.
 */
 
 @tailwind base;
@@ -19,110 +17,65 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   TEMA ESCURO — "Noite no quarto lofi"
-   ═══════════════════════════════════════════════════════════════════════════════
-   Base: marrons muito escuros (quase preto, mas quente)
-   Acento: cobre/âmbar (como a luz da luminária)
-   Texto: creme quente (não branco puro — branco puro é frio demais)
-*/
+   TEMA ESCURO — Fundo preto, texto branco
+   ═══════════════════════════════════════════════════════════════════════════════ */
 html.dark {
-  --bg-primary: #0c0a07; /* Marrom quase preto — fundo principal */
-  --bg-secondary: #16120c; /* Marrom escuro — fundo alternativo */
-  --bg-card: #1e1810; /* Marrom médio-escuro — cards */
-  --bg-elevated: #2a2118; /* Marrom elevado — hovers, bordas */
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: #111111;
+  --bg-elevated: #1a1a1a;
 
-  --accent: #c8874d; /* Cobre quente — cor principal de destaque */
-  --accent-hover: #d9a06a; /* Cobre claro — hover */
-  --accent-muted: rgba(
-    200,
-    135,
-    77,
-    0.15
-  ); /* Cobre com 15% opacidade — glows */
+  --accent: #c8874d; /* Cobre — único ponto de cor */
+  --accent-hover: #d9a06a;
+  --accent-muted: rgba(200, 135, 77, 0.12);
 
-  --text-primary: #f2e8d9; /* Creme quente — texto principal */
-  --text-secondary: #9a8672; /* Bege acinzentado — texto secundário */
-  --text-muted: #5c4f40; /* Marrom apagado — texto desabilitado */
+  --text-primary: #ffffff;
+  --text-secondary: #b8b8b8; /* Cinza claro — contraste ~8:1 no preto */
+  --text-muted: #6b6b6b; /* Cinza médio — labels, footer */
 
-  --border: rgba(242, 232, 217, 0.08); /* Borda sutil */
-  --overlay: rgba(12, 10, 7, 0.6); /* Overlay do sidebar */
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.18);
+  --overlay: rgba(0, 0, 0, 0.7);
 
-  --gradient-hero-mid: rgba(12, 10, 7, 0.4); /* Gradiente meio do banner */
-  --gradient-hero-end: #0c0a07; /* Gradiente base do banner */
+  /* Gradientes do hero */
+  --gradient-hero-mid: rgba(0, 0, 0, 0.4);
+  --gradient-hero-end: #000000;
 
-  --sidebar-bg: rgba(12, 10, 7, 0.92); /* Fundo do sidebar */
-
-  --badge-bg: rgba(242, 232, 217, 0.05); /* Fundo dos badges */
-  --badge-border: rgba(242, 232, 217, 0.1); /* Borda dos badges */
-  --badge-hover-border: rgba(200, 135, 77, 0.3); /* Borda hover dos badges */
-
-  --btn-social-bg: rgba(242, 232, 217, 0.05);
-  --btn-social-border: rgba(242, 232, 217, 0.1);
-  --btn-social-hover-bg: rgba(242, 232, 217, 0.1);
-  --btn-social-hover-border: rgba(242, 232, 217, 0.2);
-
-  --card-bg: rgba(30, 24, 16, 0.8);
-  --card-border: rgba(242, 232, 217, 0.05);
-  --tech-bg: rgba(200, 135, 77, 0.1);
-  --tech-border: rgba(200, 135, 77, 0.1);
-
-  --separator: rgba(90, 75, 55, 0.5);
-  --scrollbar-thumb: #2a2118;
-  --scrollbar-hover: #3d3226;
+  --scrollbar-thumb: #1a1a1a;
+  --scrollbar-hover: #2a2a2a;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   TEMA CLARO — "Tarde ensolarada no quarto lofi"
-   ═══════════════════════════════════════════════════════════════════════════════
-   Base: cremes e beges quentes (como a luz do sol pela janela)
-   Acento: marrom café (como a xícara na mesa)
-   Texto: marrom escuro (não preto puro — preto puro é duro demais)
-*/
+   TEMA CLARO — Fundo branco, texto preto
+   ═══════════════════════════════════════════════════════════════════════════════ */
 html.light {
-  --bg-primary: #faf5ed; /* Creme — fundo principal */
-  --bg-secondary: #f2e8d9; /* Bege claro — fundo alternativo */
-  --bg-card: #ede4d4; /* Bege — cards */
-  --bg-elevated: #e5d9c5; /* Bege escuro — hovers */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-card: #f0f0f0;
+  --bg-elevated: #e8e8e8;
 
-  --accent: #8b5e3c; /* Café/Nogueira — cor principal */
-  --accent-hover: #a0714f; /* Café claro — hover */
-  --accent-muted: rgba(139, 94, 60, 0.12); /* Café com 12% opacidade */
+  --accent: #8b5e3c;
+  --accent-hover: #a0714f;
+  --accent-muted: rgba(139, 94, 60, 0.1);
 
-  --text-primary: #1a1208; /* Marrom muito escuro — texto principal */
-  --text-secondary: #6b5540; /* Marrom médio — texto secundário */
-  --text-muted: #a89880; /* Bege escuro — texto desabilitado */
+  --text-primary: #000000;
+  --text-secondary: #555555;
+  --text-muted: #999999;
 
-  --border: rgba(26, 18, 8, 0.1);
-  --overlay: rgba(26, 18, 8, 0.4);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.15);
+  --overlay: rgba(0, 0, 0, 0.4);
 
-  --gradient-hero-mid: rgba(250, 245, 237, 0.3);
-  --gradient-hero-end: #faf5ed;
+  --gradient-hero-mid: rgba(255, 255, 255, 0.4);
+  --gradient-hero-end: #ffffff;
 
-  --sidebar-bg: rgba(250, 245, 237, 0.95);
-
-  --badge-bg: rgba(26, 18, 8, 0.05);
-  --badge-border: rgba(26, 18, 8, 0.12);
-  --badge-hover-border: rgba(139, 94, 60, 0.4);
-
-  --btn-social-bg: rgba(26, 18, 8, 0.05);
-  --btn-social-border: rgba(26, 18, 8, 0.12);
-  --btn-social-hover-bg: rgba(26, 18, 8, 0.1);
-  --btn-social-hover-border: rgba(26, 18, 8, 0.2);
-
-  --card-bg: rgba(237, 228, 212, 0.8);
-  --card-border: rgba(26, 18, 8, 0.08);
-  --tech-bg: rgba(139, 94, 60, 0.1);
-  --tech-border: rgba(139, 94, 60, 0.15);
-
-  --separator: rgba(26, 18, 8, 0.1);
-  --scrollbar-thumb: #d4c8b4;
-  --scrollbar-hover: #c0b19a;
+  --scrollbar-thumb: #d0d0d0;
+  --scrollbar-hover: #b0b0b0;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   ESTILOS BASE — usam as variáveis do tema ativo
-   ═══════════════════════════════════════════════════════════════════════════════
-*/
+   ESTILOS BASE
+   ═══════════════════════════════════════════════════════════════════════════════ */
 html {
   scroll-behavior: smooth;
 }
@@ -133,33 +86,244 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  /* Transição suave ao trocar de tema */
+  /* Transição suave ao trocar de tema (0.3s é mais snappy que 0.4s) */
   transition:
-    background-color 0.4s ease,
-    color 0.4s ease;
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
-/* ═══ SCROLLBAR ═══ */
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SCROLLBAR CUSTOMIZADA
+   ═══════════════════════════════════════════════════════════════════════════════ */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-hover);
 }
 
-/* ═══ UTILITÁRIOS CUSTOMIZADOS ═══ */
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CLASSES MODULARES — reutilizáveis em qualquer componente
+   ═══════════════════════════════════════════════════════════════════════════════
+   
+   POR QUE @layer components?
+   O Tailwind organiza CSS em 3 camadas: base < components < utilities.
+   Colocar nossas classes em "components" garante que:
+   1. Classes utilitárias do Tailwind (como "mt-4") ainda sobrescrevem
+   2. Nossas classes têm prioridade sobre @layer base
+   3. Podemos usar @apply para misturar classes do Tailwind
+*/
+@layer components {
+  /* ─── SECTION LABEL ─── */
+  /* Aquela linha + texto "Sobre", "Trabalhos" que aparece antes de cada seção */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-label::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+  .section-label span {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ─── CARD ─── */
+  /* Card base reutilizável — projetos, blog posts, qualquer coisa */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition:
+      border-color 0.3s ease,
+      transform 0.3s ease;
+  }
+  .card:hover {
+    border-color: var(--border-hover);
+  }
+
+  /* ─── BADGE ─── */
+  /* Pílula para skills, tags de tech, categorias */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.875rem;
+    font-size: 0.8125rem;
+    margin-right: 0.5rem; /* Espaço na horizontal */
+    margin-bottom: 0.5rem; /* Espaço na vertical */
+    font-weight: 500;
+    border-radius: 9999px;
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    transition:
+      border-color 0.3s ease,
+      color 0.3s ease;
+  }
+  .badge:hover {
+    border-color: var(--accent-muted);
+    color: var(--accent);
+  }
+
+  /* ─── BADGE TECH ─── */
+  /* Variante menor para tags de tecnologia dentro de cards */
+  .badge-tech {
+    display: inline-flex;
+    padding: 0.3rem 0.625rem;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    background: var(--accent-muted);
+    color: var(--accent);
+    border: 1px solid transparent;
+  }
+
+  /* ─── BOTÕES ─── */
+  /* Botão primário (CTA) — fundo acento, texto fundo */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    background: var(--accent);
+    color: var(--bg-primary);
+    transition:
+      background 0.3s ease,
+      transform 0.2s ease;
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  /* Botão ícone — círculo transparente com borda */
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem; /* Espaço na vertical */
+    margin-bottom: 1rem; /* Espaço na vertical */
+    margin-left: 0.2rem; /* Espaço na horizontal */
+    margin-right: 0.2rem; /* Espaço na horizontal */
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    transition:
+      border-color 0.3s ease,
+      color 0.3s ease,
+      background 0.3s ease;
+  }
+  .btn-icon:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    background: var(--bg-hover);
+  }
+
+  /* ─── GLASS (efeito vidro) ─── */
+  /* Sidebar, overlays, qualquer coisa que precise de blur */
+  .glass {
+    background: var(--bg-primary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid var(--border);
+  }
+
+  /* ─── SEPARADOR ─── */
+  .separator {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border),
+      transparent
+    );
+  }
+
+  /* ─── INDICADOR DE MENU ATIVO ─── */
+  /* Barra lateral colorida no item ativo do Sidebar */
+  /* Precisa de CSS porque ::before não existe no Tailwind */
+  .nav-active {
+    position: relative;
+  }
+  .nav-active::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 0 3px 3px 0;
+  }
+
+  /* ─── LINK COM UNDERLINE ANIMADO ─── */
+  .link-underline {
+    position: relative;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .link-underline:hover {
+    color: var(--accent);
+  }
+  .link-underline:hover::after {
+    width: 100%;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   UTILITÁRIOS CUSTOMIZADOS
+   ═══════════════════════════════════════════════════════════════════════════════ */
 @layer utilities {
+  /* Texto com gradiente cobre */
   .text-gradient {
     background: linear-gradient(135deg, var(--accent-hover), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Esconde scrollbar mas mantém scroll funcional */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
