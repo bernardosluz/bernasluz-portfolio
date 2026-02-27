@@ -20,7 +20,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 // AnimatePresence → permite animar componentes quando eles SAEM do DOM
 // Sem ele, o React remove o elemento instantaneamente e a animação de saída não rola
-import { Sun, Moon, X } from "lucide-react";
+import { Sun, Moon, X, Menu } from "lucide-react";
 import { useTheme } from "@/hooks/ThemeProvider";
 
 // ═══ Dados do menu ═══
@@ -89,21 +89,7 @@ export default function Sidebar() {
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                {/* Hambúrguer manual — 3 linhas com espaçamento uniforme */}
-                <div className="w-[18px] flex flex-col gap-[4px]">
-                  <div
-                    className="h-[2px] w-full rounded-full"
-                    style={{ background: "var(--text-primary)" }}
-                  />
-                  <div
-                    className="h-[2px] w-full rounded-full"
-                    style={{ background: "var(--text-primary)" }}
-                  />
-                  <div
-                    className="h-[2px] w-full rounded-full"
-                    style={{ background: "var(--text-primary)" }}
-                  />
-                </div>
+                <Menu size={20} />
               </motion.div>
             )}
           </AnimatePresence>
