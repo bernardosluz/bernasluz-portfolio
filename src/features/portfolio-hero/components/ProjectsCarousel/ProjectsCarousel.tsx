@@ -186,7 +186,7 @@ export default function ProjectsCarousel() {
   return (
     <section className="py-24 md:py-36 overflow-hidden">
       {/* ─── Cabeçalho ─── */}
-      <div className="px-5 sm:px-8 max-w-3xl mx-auto">
+      <div className="px-5 sm:px-8 lg:px-12 max-w-5xl mx-auto">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

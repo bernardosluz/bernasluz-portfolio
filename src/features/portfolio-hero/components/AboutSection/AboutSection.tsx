@@ -22,7 +22,7 @@ export default function AboutSection() {
   const allSkills = Object.values(siteConfig.skills).flat();
 
   return (
-    <section className="py-24 md:py-36 px-5 sm:px-8">
+    <section className="py-24 md:py-36 px-5 sm:px-8 lg:px-12 max-w-5xl mx-auto">
       {/* py-24/36 = espaço generoso em cima e embaixo → separa visualmente das outras seções */}
       <motion.div
         variants={staggerContainer}
@@ -32,7 +32,7 @@ export default function AboutSection() {
         viewport={{ once: true, margin: "-80px" }}
         // once: true = anima só 1 vez (não repete ao scrollar de volta)
         // margin: "-80px" = dispara 80px antes de realmente aparecer
-        className="max-w-3xl mx-auto"
+        className=""
       >
         {/* Label — usa classe modular .section-label */}
         <motion.div variants={fadeInUp} className="section-label">
