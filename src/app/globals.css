@@ -1,32 +1,165 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+   GLOBALS.CSS - ESTILOS GLOBAIS COM TEMA DUPLO (ESCURO / CLARO)
+   ═══════════════════════════════════════════════════════════════════════════════
+   
+   SISTEMA DE TEMAS:
+   O ThemeProvider.tsx adiciona class="dark" ou class="light" no <html>.
+   Aqui definimos variáveis CSS diferentes para cada classe.
+   Todos os componentes usam var(--nome) → mudam automaticamente!
+   
+   PALETA "LOFI WARM" — inspirada na foto:
+   - Marrons quentes (madeira, estante, mesa)
+   - Cobre/Âmbar (luz da luminária)
+   - Creme/Bege (luz do entardecer pela janela)
+   - Verde sutil (luminária, planta)
+*/
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 2, 6, 23;
-  --background-end-rgb: 2, 6, 23;
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TEMA ESCURO — "Noite no quarto lofi"
+   ═══════════════════════════════════════════════════════════════════════════════
+   Base: marrons muito escuros (quase preto, mas quente)
+   Acento: cobre/âmbar (como a luz da luminária)
+   Texto: creme quente (não branco puro — branco puro é frio demais)
+*/
+html.dark {
+  --bg-primary: #0c0a07; /* Marrom quase preto — fundo principal */
+  --bg-secondary: #16120c; /* Marrom escuro — fundo alternativo */
+  --bg-card: #1e1810; /* Marrom médio-escuro — cards */
+  --bg-elevated: #2a2118; /* Marrom elevado — hovers, bordas */
+
+  --accent: #c8874d; /* Cobre quente — cor principal de destaque */
+  --accent-hover: #d9a06a; /* Cobre claro — hover */
+  --accent-muted: rgba(
+    200,
+    135,
+    77,
+    0.15
+  ); /* Cobre com 15% opacidade — glows */
+
+  --text-primary: #f2e8d9; /* Creme quente — texto principal */
+  --text-secondary: #9a8672; /* Bege acinzentado — texto secundário */
+  --text-muted: #5c4f40; /* Marrom apagado — texto desabilitado */
+
+  --border: rgba(242, 232, 217, 0.08); /* Borda sutil */
+  --overlay: rgba(12, 10, 7, 0.6); /* Overlay do sidebar */
+
+  --gradient-hero-mid: rgba(12, 10, 7, 0.4); /* Gradiente meio do banner */
+  --gradient-hero-end: #0c0a07; /* Gradiente base do banner */
+
+  --sidebar-bg: rgba(12, 10, 7, 0.92); /* Fundo do sidebar */
+
+  --badge-bg: rgba(242, 232, 217, 0.05); /* Fundo dos badges */
+  --badge-border: rgba(242, 232, 217, 0.1); /* Borda dos badges */
+  --badge-hover-border: rgba(200, 135, 77, 0.3); /* Borda hover dos badges */
+
+  --btn-social-bg: rgba(242, 232, 217, 0.05);
+  --btn-social-border: rgba(242, 232, 217, 0.1);
+  --btn-social-hover-bg: rgba(242, 232, 217, 0.1);
+  --btn-social-hover-border: rgba(242, 232, 217, 0.2);
+
+  --card-bg: rgba(30, 24, 16, 0.8);
+  --card-border: rgba(242, 232, 217, 0.05);
+  --tech-bg: rgba(200, 135, 77, 0.1);
+  --tech-border: rgba(200, 135, 77, 0.1);
+
+  --separator: rgba(90, 75, 55, 0.5);
+  --scrollbar-thumb: #2a2118;
+  --scrollbar-hover: #3d3226;
 }
 
-/* Garante que o scrollbar também fique dark e elegante */
-::-webkit-scrollbar {
-  width: 10px;
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TEMA CLARO — "Tarde ensolarada no quarto lofi"
+   ═══════════════════════════════════════════════════════════════════════════════
+   Base: cremes e beges quentes (como a luz do sol pela janela)
+   Acento: marrom café (como a xícara na mesa)
+   Texto: marrom escuro (não preto puro — preto puro é duro demais)
+*/
+html.light {
+  --bg-primary: #faf5ed; /* Creme — fundo principal */
+  --bg-secondary: #f2e8d9; /* Bege claro — fundo alternativo */
+  --bg-card: #ede4d4; /* Bege — cards */
+  --bg-elevated: #e5d9c5; /* Bege escuro — hovers */
+
+  --accent: #8b5e3c; /* Café/Nogueira — cor principal */
+  --accent-hover: #a0714f; /* Café claro — hover */
+  --accent-muted: rgba(139, 94, 60, 0.12); /* Café com 12% opacidade */
+
+  --text-primary: #1a1208; /* Marrom muito escuro — texto principal */
+  --text-secondary: #6b5540; /* Marrom médio — texto secundário */
+  --text-muted: #a89880; /* Bege escuro — texto desabilitado */
+
+  --border: rgba(26, 18, 8, 0.1);
+  --overlay: rgba(26, 18, 8, 0.4);
+
+  --gradient-hero-mid: rgba(250, 245, 237, 0.3);
+  --gradient-hero-end: #faf5ed;
+
+  --sidebar-bg: rgba(250, 245, 237, 0.95);
+
+  --badge-bg: rgba(26, 18, 8, 0.05);
+  --badge-border: rgba(26, 18, 8, 0.12);
+  --badge-hover-border: rgba(139, 94, 60, 0.4);
+
+  --btn-social-bg: rgba(26, 18, 8, 0.05);
+  --btn-social-border: rgba(26, 18, 8, 0.12);
+  --btn-social-hover-bg: rgba(26, 18, 8, 0.1);
+  --btn-social-hover-border: rgba(26, 18, 8, 0.2);
+
+  --card-bg: rgba(237, 228, 212, 0.8);
+  --card-border: rgba(26, 18, 8, 0.08);
+  --tech-bg: rgba(139, 94, 60, 0.1);
+  --tech-border: rgba(139, 94, 60, 0.15);
+
+  --separator: rgba(26, 18, 8, 0.1);
+  --scrollbar-thumb: #d4c8b4;
+  --scrollbar-hover: #c0b19a;
 }
 
-::-webkit-scrollbar-track {
-  background: #020617;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+/* ═══════════════════════════════════════════════════════════════════════════════
+   ESTILOS BASE — usam as variáveis do tema ativo
+   ═══════════════════════════════════════════════════════════════════════════════
+*/
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Transição suave ao trocar de tema */
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* ═══ SCROLLBAR ═══ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover);
+}
+
+/* ═══ UTILITÁRIOS CUSTOMIZADOS ═══ */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }

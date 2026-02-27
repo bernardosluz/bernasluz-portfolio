@@ -66,6 +66,7 @@ import Sidebar from "@/features/portfolio-hero/components/Sidebar/Sidebar";
 //
 // "export const" = essa variável pode ser importada por outros arquivos
 // O Next.js automaticamente lê essa variável e aplica as configurações
+import ThemeProvider from "@/hooks/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Bernardo Luz | Portfólio",
@@ -110,42 +111,21 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="pt-BR">
-      {/* 
-        ════════════════════════════════════════════════════════════════════════
-        TAG <html>
-        ════════════════════════════════════════════════════════════════════════
-        lang="pt-BR" é importante para:
-          - Leitores de tela saberem a pronúncia correta
-          - Google entender o idioma do site
-          - Navegadores oferecerem tradução
-      */}
-
-      <body className="bg-slate-950 text-white antialiased">
-        {/* 
-          ════════════════════════════════════════════════════════════════════════
-          CLASSES DO BODY
-          ════════════════════════════════════════════════════════════════════════
-          bg-slate-950  → Fundo bem escuro (quase preto)
-          text-white    → Texto branco por padrão
-          antialiased   → Suaviza as bordas das fontes (fica mais bonito)
-        */}
-
-        {/* SIDEBAR - Aparece em TODAS as páginas */}
-        <Sidebar />
-
-        {/* CONTEÚDO PRINCIPAL */}
-        <main>
-          {children}
-          {/* 
-            children = o conteúdo da página atual
-            
-            Se você está em "/" → children = conteúdo de app/page.tsx
-            Se você está em "/projects" → children = conteúdo de app/projects/page.tsx
-            
-            O layout é o "moldura", children é o "quadro" que muda
-          */}
-        </main>
+    // suppressHydrationWarning → evita warning quando o ThemeProvider
+    // altera a classe do <html> no client (dark/light).
+    // O servidor não sabe qual tema o usuário escolheu (está no localStorage),
+    // então o HTML inicial pode diferir do client. Esse atributo diz ao React:
+    // "tudo bem, eu sei que vai mudar no client, não reclame"
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body
+        className="antialiased transition-colors duration-400"
+        suppressHydrationWarning
+      >
+        {/* ThemeProvider envolve TUDO — qualquer componente pode usar useTheme() */}
+        <ThemeProvider>
+          <Sidebar />
+          <main>{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );

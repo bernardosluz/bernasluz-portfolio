@@ -1,13 +1,25 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// SIDEBAR COM BOTÃO DE TROCA DE TEMA
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// NOVIDADE:
+// Adicionado botão de sol/lua no cabeçalho do sidebar para trocar entre
+// tema escuro e claro. Usa o hook useTheme() do nosso ThemeProvider.
+//
+// O botão fica TAMBÉM no canto superior direito da tela (ao lado do hambúrguer),
+// visível mesmo com o sidebar fechado.
+
 "use client";
-// 'use client' = Este componente roda no NAVEGADOR (não no servidor)
-// Necessário porque usamos useState, onClick, usePathname
 
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Sun, Moon } from "lucide-react";
+// Sun = ícone de sol (indica: clique para tema claro)
+// Moon = ícone de lua (indica: clique para tema escuro)
+import { useTheme } from "@/hooks/ThemeProvider";
 import "./Sidebar.css";
 
-// Interface define o "formato" de cada item do menu
 interface MenuItem {
   label: string;
   path: string;
@@ -16,16 +28,20 @@ interface MenuItem {
 }
 
 export default function Sidebar() {
-  // Estado: sidebar aberto ou fechado
   const [isOpen, setIsOpen] = useState(false);
-
-  // Pega a URL atual para destacar o item ativo
   const pathname = usePathname();
+  const { theme, toggleTheme } = useTheme();
+  // theme → "dark" ou "light"
+  // toggleTheme → função que alterna entre os dois
 
-  // Lista de itens do menu
   const menuItems: MenuItem[] = [
     { label: "Sobre Mim", path: "/", disabled: false },
-    { label: "Estudo", path: "/estudo/index.html", disabled: false, newTab: false },
+    {
+      label: "Estudo",
+      path: "/estudo/index.html",
+      disabled: false,
+      newTab: false,
+    },
     { label: "Projetos", path: "/projects", disabled: true },
     { label: "Habilidades", path: "/skills", disabled: true },
     { label: "TCC", path: "/tcc", disabled: true },
@@ -33,63 +49,93 @@ export default function Sidebar() {
     { label: "Doutorado", path: "/doutorado", disabled: true },
   ];
 
-  // Alterna entre aberto/fechado
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   return (
     <>
       {/* ════════════════════════════════════════════════════════════════════
-          BOTÃO HAMBÚRGUER
+          BARRA SUPERIOR FIXA (hambúrguer + botão de tema)
           ════════════════════════════════════════════════════════════════════
-          Next.js compara o HTML do servidor com o do cliente.
+          Ficam sempre visíveis, mesmo com o sidebar fechado.
       */}
-      <button
-        onClick={toggleSidebar}
-        className="fixed top-4 left-4 z-50 p-3 rounded-lg bg-slate-800/80 backdrop-blur-sm hover:bg-slate-700 transition-colors duration-200"
-        aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
-      >
-        {/* Ícone hambúrguer animado - 3 linhas que viram X */}
-        <div className="w-6 h-5 relative flex flex-col justify-between">
-          <span
-            className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 origin-left ${isOpen ? "rotate-45 translate-x-px" : ""}`}
-          />
-          <span
-            className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ${isOpen ? "opacity-0 scale-0" : ""}`}
-          />
-          <span
-            className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 origin-left ${isOpen ? "-rotate-45 translate-x-px" : ""}`}
-          />
-        </div>
-      </button>
+      <div className="fixed top-4 left-4 right-4 z-50 flex items-center justify-between pointer-events-none">
+        {/* pointer-events-none no container, pointer-events-auto nos botões
+            → o div não bloqueia cliques no conteúdo atrás dele */}
 
-      {/* ════════════════════════════════════════════════════════════════════
-          OVERLAY - Fundo escuro quando sidebar está aberto
-          ════════════════════════════════════════════════════════════════════ */}
+        {/* Botão hambúrguer */}
+        <button
+          onClick={toggleSidebar}
+          className="p-3 rounded-lg backdrop-blur-md transition-colors duration-200 pointer-events-auto"
+          style={{
+            background: "var(--bg-secondary)",
+            border: "1px solid var(--border)",
+          }}
+          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+        >
+          <div className="w-6 h-5 relative flex flex-col justify-between">
+            <span
+              className={`w-full h-0.5 rounded-full transition-all duration-300 origin-left ${isOpen ? "rotate-45 translate-x-px" : ""}`}
+              style={{ background: "var(--text-primary)" }}
+            />
+            <span
+              className={`w-full h-0.5 rounded-full transition-all duration-300 ${isOpen ? "opacity-0 scale-0" : ""}`}
+              style={{ background: "var(--text-primary)" }}
+            />
+            <span
+              className={`w-full h-0.5 rounded-full transition-all duration-300 origin-left ${isOpen ? "-rotate-45 translate-x-px" : ""}`}
+              style={{ background: "var(--text-primary)" }}
+            />
+          </div>
+        </button>
+
+        {/* ════════════════════════════════════════════════════════════════════
+            BOTÃO DE TROCAR TEMA (SOL / LUA)
+            ════════════════════════════════════════════════════════════════════
+            Se o tema é "dark" → mostra ícone de SOL (clique para clarear)
+            Se o tema é "light" → mostra ícone de LUA (clique para escurecer)
+            
+            O ícone tem uma rotação animada ao clicar (transition-transform).
+        */}
+        <button
+          onClick={toggleTheme}
+          className="p-3 rounded-lg backdrop-blur-md transition-all duration-300 pointer-events-auto"
+          style={{
+            background: "var(--bg-secondary)",
+            border: "1px solid var(--border)",
+            color: "var(--accent)",
+          }}
+          aria-label={
+            theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
+          }
+        >
+          {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
+      </div>
+
+      {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-30 backdrop-blur-sm"
+          style={{ background: "var(--overlay)" }}
           onClick={toggleSidebar}
         />
       )}
 
-      {/* ════════════════════════════════════════════════════════════════════
-          SIDEBAR PRINCIPAL
-          ════════════════════════════════════════════════════════════════════
-          Classes explicadas:
-          - sidebar-glass: efeito vidro do CSS
-          - fixed top-0 left-0: grudado no canto superior esquerdo
-          - h-screen: altura = 100% da tela
-          - w-72: largura de 288px
-          - translate-x-0: posição normal (visível)
-          - -translate-x-full: move 100% para esquerda (escondido)
-      */}
+      {/* Sidebar */}
       <aside
         className={`sidebar-glass fixed top-0 left-0 h-screen w-72 p-6 pt-20 flex flex-col z-40 transition-transform duration-300 ease-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         {/* Cabeçalho */}
         <div className="mb-8">
-          <h2 className="text-xl font-bold text-white">Bernardo Luz</h2>
-          <p className="text-sm text-slate-400">Portfólio</p>
+          <h2
+            className="text-xl font-bold"
+            style={{ color: "var(--text-primary)" }}
+          >
+            Bernardo Luz
+          </h2>
+          <p className="text-sm" style={{ color: "var(--accent)" }}>
+            Portfólio
+          </p>
         </div>
 
         {/* Navegação */}
@@ -97,18 +143,35 @@ export default function Sidebar() {
           {menuItems.map((item) => {
             const isActive = pathname === item.path;
 
-            // Monta as classes baseado no estado do item
-            // Separei em variável para ficar mais legível
-            const linkClasses = `nav-item-transition flex items-center gap-3 w-full p-3 rounded-lg ${
-              item.disabled
-                ? "opacity-50 cursor-not-allowed text-slate-500"
-                : isActive
-                  ? "bg-blue-600/20 text-blue-400 active-indicator"
-                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
-            }`;
+            // Classes dinâmicas + styles inline para cores do tema
+            const baseClasses =
+              "nav-item-transition flex items-center gap-3 w-full p-3 rounded-lg";
 
-            // Use a plain <a> when we want to open in a new tab (reliably opens static files)
-            if (item.newTab && !item.disabled) {
+            if (item.disabled) {
+              return (
+                <Link
+                  key={item.path}
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
+                  className={`${baseClasses} opacity-50 cursor-not-allowed`}
+                  style={{ color: "var(--text-muted)" }}
+                  aria-disabled
+                >
+                  <span className="font-medium">{item.label}</span>
+                  <span
+                    className="ml-auto text-xs px-2 py-0.5 rounded-full"
+                    style={{
+                      background: "var(--bg-elevated)",
+                      color: "var(--text-muted)",
+                    }}
+                  >
+                    Em breve
+                  </span>
+                </Link>
+              );
+            }
+
+            if (item.newTab) {
               return (
                 <a
                   key={item.path}
@@ -116,7 +179,10 @@ export default function Sidebar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
-                  className={linkClasses}
+                  className={`${baseClasses}`}
+                  style={{
+                    color: isActive ? "var(--accent)" : "var(--text-secondary)",
+                  }}
                 >
                   <span className="font-medium">{item.label}</span>
                 </a>
@@ -126,32 +192,26 @@ export default function Sidebar() {
             return (
               <Link
                 key={item.path}
-                href={item.disabled ? "#" : item.path}
-                onClick={(e) => {
-                  if (item.disabled) {
-                    e.preventDefault();
-                    return;
-                  }
-                  setIsOpen(false);
+                href={item.path}
+                onClick={() => setIsOpen(false)}
+                className={`${baseClasses} ${isActive ? "active-indicator" : ""}`}
+                style={{
+                  color: isActive ? "var(--accent)" : "var(--text-secondary)",
+                  background: isActive ? "var(--accent-muted)" : "transparent",
                 }}
-                className={linkClasses}
-                aria-disabled={item.disabled}
                 aria-current={isActive ? "page" : undefined}
               >
                 <span className="font-medium">{item.label}</span>
-                {item.disabled && (
-                  <span className="ml-auto text-xs bg-slate-700 px-2 py-0.5 rounded-full">
-                    Em breve
-                  </span>
-                )}
               </Link>
             );
           })}
         </nav>
 
         {/* Rodapé */}
-        <div className="pt-6 border-t border-slate-700/50">
-          <p className="text-xs text-slate-500">© 2025 Bernardo Luz</p>
+        <div className="pt-6" style={{ borderTop: "1px solid var(--border)" }}>
+          <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+            © 2025 Bernardo Luz
+          </p>
         </div>
       </aside>
     </>
