@@ -349,11 +349,15 @@ export default function ProjectsCarousel() {
             <button
               key={index}
               onClick={() => handleDotClick(index)}
-              className="block flex-shrink-0 h-2 rounded-full transition-all duration-500"
+              /* Cores passadas para o className via valores arbitrários do Tailwind para evitar bugs no mobile */
+              className={`block flex-shrink-0 h-2 rounded-full transition-all duration-500 appearance-none border-none outline-none p-0 m-0 ${
+                activeReal === index
+                  ? "bg-[var(--accent)]"
+                  : "bg-[var(--text-muted)]"
+              }`}
               style={{
                 width: activeReal === index ? "28px" : "8px",
-                backgroundColor:
-                  activeReal === index ? "var(--accent)" : "var(--text-muted)",
+                minWidth: activeReal === index ? "28px" : "8px",
               }}
               aria-label={`Ir para projeto ${index + 1}`}
             />
