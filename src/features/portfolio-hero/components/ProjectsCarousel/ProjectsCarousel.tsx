@@ -349,10 +349,10 @@ export default function ProjectsCarousel() {
             <button
               key={index}
               onClick={() => handleDotClick(index)}
-              className="h-2 rounded-full transition-all duration-500"
+              className="block flex-shrink-0 h-2 rounded-full transition-all duration-500"
               style={{
                 width: activeReal === index ? "28px" : "8px",
-                background:
+                backgroundColor:
                   activeReal === index ? "var(--accent)" : "var(--text-muted)",
               }}
               aria-label={`Ir para projeto ${index + 1}`}
