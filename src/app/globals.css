@@ -69,8 +69,8 @@ html.light {
   --gradient-hero-mid: rgba(255, 255, 255, 0.4);
   --gradient-hero-end: #ffffff;
 
-  --scrollbar-thumb: #d0d0d0;
-  --scrollbar-hover: #b0b0b0;
+  --scrollbar-thumb: #858585;
+  --scrollbar-hover: #646464;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
