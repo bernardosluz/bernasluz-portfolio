@@ -15,7 +15,7 @@ import ProjectsCarousel from "../ProjectsCarousel/ProjectsCarousel";
 
 export function Home() {
   return (
-    <>
+    <main className="relative">
       <BannerHero />
       <AboutSection />
       <ProjectsCarousel />
@@ -25,6 +25,6 @@ export function Home() {
           © 2025 Bernardo Luz — Next.js + Framer Motion
         </p>
       </footer>
-    </>
+    </main>
   );
 }

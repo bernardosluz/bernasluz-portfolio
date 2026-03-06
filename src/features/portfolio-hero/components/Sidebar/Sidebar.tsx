@@ -32,6 +32,15 @@ interface MenuItem {
   newTab?: boolean;
 }
 
+// ═══ Constantes de animação ═══
+// Valores reutilizáveis para animações dos botões na navbar
+const NAV_BUTTON_DISPLACEMENT = 150; // Distância que os botões se movem (em px)
+const ANIMATION_SPRING = {
+  type: "spring" as const,
+  damping: 25,
+  stiffness: 300,
+};
+
 const menuItems: MenuItem[] = [
   { label: "Sobre Mim", path: "/", disabled: false },
   {
@@ -62,10 +71,12 @@ export default function Sidebar() {
       */}
       <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 pointer-events-none">
         {/* Botão hambúrguer / fechar */}
-        <button
+        <motion.button
           onClick={() => setIsOpen(!isOpen)}
           className="btn-icon pointer-events-auto"
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+          animate={{ x: isOpen ? NAV_BUTTON_DISPLACEMENT : 0 }}
+          transition={ANIMATION_SPRING}
         >
           {/* AnimatePresence com mode="wait":
               Espera a animação de SAÍDA terminar antes de montar o novo ícone.
@@ -93,16 +104,19 @@ export default function Sidebar() {
               </motion.div>
             )}
           </AnimatePresence>
-        </button>
+        </motion.button>
 
         {/* Botão toggle tema */}
-        <button
+        <motion.button
           onClick={toggleTheme}
           className="btn-icon pointer-events-auto"
           style={{ color: "var(--accent)" }}
           aria-label={
             theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
           }
+          suppressHydrationWarning
+          animate={{ x: isOpen ? -NAV_BUTTON_DISPLACEMENT : 0 }}
+          transition={ANIMATION_SPRING}
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -115,7 +129,7 @@ export default function Sidebar() {
               {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </motion.div>
           </AnimatePresence>
-        </button>
+        </motion.button>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════

@@ -25,6 +25,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { siteConfig } from "@/lib/config";
@@ -247,10 +248,11 @@ export default function ProjectsCarousel() {
                   {/* Imagem / Placeholder */}
                   <div className="relative h-44 sm:h-48 overflow-hidden">
                     {project.image ? (
-                      <img
+                      <Image
                         src={project.image}
                         alt={`Screenshot - ${project.title}`}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
                       />
                     ) : (
                       <div
