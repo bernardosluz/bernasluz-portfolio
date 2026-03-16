@@ -22,6 +22,7 @@ import { motion, AnimatePresence } from "framer-motion";
 // Sem ele, o React remove o elemento instantaneamente e a animação de saída não rola
 import { Sun, Moon, X, Menu } from "lucide-react";
 import { useTheme } from "@/hooks/ThemeProvider";
+import "./Sidebar.css";
 
 // ═══ Dados do menu ═══
 // Centralizados aqui em vez de inline no JSX para facilitar manutenção
@@ -51,7 +52,7 @@ const menuItems: MenuItem[] = [
   },
   { label: "Projetos", path: "/projects", disabled: true },
   { label: "Habilidades", path: "/skills", disabled: true },
-  { label: "TCC", path: "/tcc", disabled: true },
+  { label: "TCC", path: "/tcc", disabled: false },
   { label: "Mestrado", path: "/mestrado", disabled: true },
   { label: "Doutorado", path: "/doutorado", disabled: true },
 ];
@@ -69,15 +70,16 @@ export default function Sidebar() {
           pointer-events-none no container → não bloqueia cliques no conteúdo
           pointer-events-auto nos botões → só os botões são clicáveis
       */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 pointer-events-none">
-        {/* Botão hambúrguer / fechar */}
-        <motion.button
-          onClick={() => setIsOpen(!isOpen)}
-          className="btn-icon pointer-events-auto"
-          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
-          animate={{ x: isOpen ? NAV_BUTTON_DISPLACEMENT : 0 }}
-          transition={ANIMATION_SPRING}
-        >
+      <div className="nav-bar">
+        <div className="top-controls">
+          {/* Botão hambúrguer / fechar */}
+          <motion.button
+            onClick={() => setIsOpen(!isOpen)}
+            className="btn-icon menu-toggle-btn"
+            aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+            animate={{ x: isOpen ? NAV_BUTTON_DISPLACEMENT : 0 }}
+            transition={ANIMATION_SPRING}
+          >
           {/* AnimatePresence com mode="wait":
               Espera a animação de SAÍDA terminar antes de montar o novo ícone.
               Sem mode="wait", os dois ícones ficam visíveis ao mesmo tempo. */}
@@ -109,7 +111,7 @@ export default function Sidebar() {
         {/* Botão toggle tema */}
         <motion.button
           onClick={toggleTheme}
-          className="btn-icon pointer-events-auto"
+          className="btn-icon theme-toggle-btn"
           style={{ color: "var(--accent)" }}
           aria-label={
             theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
@@ -130,6 +132,7 @@ export default function Sidebar() {
             </motion.div>
           </AnimatePresence>
         </motion.button>
+        </div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════

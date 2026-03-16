@@ -54,4 +54,15 @@ export const siteConfig = {
     backend: [".NET Core", "C#", "Node.js", "SQL Server"],
     tools: ["Git", "VS Code", "Figma", "Docker"],
   },
+  tcc: {
+    title: "Título do TCC",
+    subtitle: "Subtítulo ou descrição breve",
+    institution: "Universidade Federal de Sergipe",
+    year: 2026,
+    advisor: "Prof. Dr. Nome do Orientador",
+    abstract:
+      "Resumo do trabalho de conclusão de curso. Descreva brevemente o escopo, objetivo e principais contribuições.",
+    keywords: ["palavra-chave-1", "palavra-chave-2", "palavra-chave-3"],
+    articles: [],
+  },
 };
