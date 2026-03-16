@@ -24,6 +24,15 @@ export const siteConfig = {
     youtube: "https://www.youtube.com/@bernasluz",
     email: "mailto:contato@bernasluz.com.br",
   },
+  studyPlaylist: {
+    title: "Playlist de Música",
+    description:
+      "Uma seleção pessoal para estudar, trabalhar e manter o foco ao longo do dia.",
+    videoEmbedUrl:
+      "https://www.youtube.com/embed/videoseries?list=PL2ftnQDAfvNVN53sz0PGBkHRrKsXufzxD",
+    playlistUrl: "https://www.youtube.com/playlist?list=PL2ftnQDAfvNVN53sz0PGBkHRrKsXufzxD",
+    genres: ["Lofi", "Instrumental", "Clássica"],
+  },
   projects: [
     {
       title: "Lojinha API",

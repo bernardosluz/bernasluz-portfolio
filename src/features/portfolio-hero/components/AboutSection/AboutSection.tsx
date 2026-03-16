@@ -20,6 +20,7 @@ export default function AboutSection() {
   // Object.values() pega os arrays de cada categoria
   // .flat() junta todos em um só
   const allSkills = Object.values(siteConfig.skills).flat();
+  const playlist = siteConfig.studyPlaylist;
 
   return (
     <section className="py-24 md:py-36 px-5 sm:px-8 lg:px-12 max-w-5xl mx-auto">
@@ -32,11 +33,10 @@ export default function AboutSection() {
         viewport={{ once: true, margin: "-80px" }}
         // once: true = anima só 1 vez (não repete ao scrollar de volta)
         // margin: "-80px" = dispara 80px antes de realmente aparecer
-        className=""
       >
         {/* Label — usa classe modular .section-label */}
         <motion.div variants={fadeInUp} className="section-label">
-          <span>Sobre</span>
+          <span>Sobre Mim</span>
         </motion.div>
 
         {/* Título */}
@@ -45,7 +45,7 @@ export default function AboutSection() {
           className="text-3xl sm:text-4xl md:text-5xl font-bold"
           style={{ color: "var(--text-primary)" }}
         >
-          Sobre Mim
+          Resumo Profissional e Estudantil
         </motion.h2>
 
         {/* Bio */}
@@ -78,6 +78,70 @@ export default function AboutSection() {
             </motion.span>
           ))}
         </motion.div>
+
+        {/* Playlist de Música */}
+        <motion.h2
+          variants={fadeInUp}
+          className="mt-12 text-3xl sm:text-4xl md:text-5xl font-bold"
+          style={{ color: "var(--text-primary)" }}
+        >
+          {playlist.title}
+        </motion.h2>
+
+        <motion.p
+          variants={fadeInUp}
+          className="mt-6 text-lg sm:text-xl leading-relaxed"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          {playlist.description}
+        </motion.p>
+        
+        {/* Gêneros — cada badge anima individualmente */}
+        <motion.div
+          variants={staggerFast}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 flex flex-wrap gap-2"
+        >
+          {playlist.genres.map((genre) => (
+            <motion.span
+              key={genre}
+              variants={fadeInUp}
+              className="badge"
+              // .badge é a classe modular do globals.css
+              // Já tem padding, border-radius, cores do tema, hover, tudo pronto
+            >
+              {genre}
+            </motion.span>
+          ))}
+        </motion.div>
+
+        <motion.div
+          variants={fadeInUp}
+          className="mt-6 overflow-hidden rounded-xl border flex items-center justify-center md:px-10 md:py-10 lg:px-14 lg:py-12"
+          style={{ borderColor: "var(--border)", backgroundColor: "var(--accent)" }}
+        >
+          <iframe
+            src={playlist.videoEmbedUrl}
+            title="Playlist de Música"
+            className="block w-full md:w-[86%] lg:w-[82%] max-w-[900px] aspect-video"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </motion.div>
+
+        <motion.a
+          variants={fadeInUp}
+          href={playlist.playlistUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-primary mt-6"
+        >
+          Abrir playlist completa
+        </motion.a>
       </motion.div>
     </section>
   );
