@@ -21,6 +21,7 @@ export const siteConfig = {
     github: "https://github.com/bernardosluz",
     linkedin: "https://www.linkedin.com/in/bernardo-silva-luz-740979248/",
     instagram: "https://www.instagram.com/bernasluz",
+    youtube: "https://www.youtube.com/@bernasluz",
     email: "mailto:contato@bernasluz.com.br",
   },
   projects: [

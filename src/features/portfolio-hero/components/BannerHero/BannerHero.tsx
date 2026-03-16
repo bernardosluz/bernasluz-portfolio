@@ -35,7 +35,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Github, Linkedin, Instagram, MapPin } from "lucide-react";
+import { Github, Linkedin, Instagram, Youtube, MapPin } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
@@ -185,6 +185,15 @@ export default function BannerHero() {
                 aria-label="Instagram"
               >
                 <Instagram size={20} />
+              </a>
+              <a
+                href={siteConfig.links.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-icon"
+                aria-label="YouTube"
+              >
+                <Youtube size={20} />
               </a>
             </motion.div>
           </div>

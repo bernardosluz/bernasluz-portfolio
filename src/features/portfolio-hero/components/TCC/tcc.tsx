@@ -43,7 +43,6 @@ const tccSections = [
 
 export default function TCCSection() {
   const { tcc } = siteConfig;
-  const hasArticles = tcc.articles.length > 0;
 
   return (
     <main className="relative min-h-screen">
@@ -165,28 +164,28 @@ export default function TCCSection() {
       </section>
 
       {/* ═══ Artigos publicados ═══ */}
-      <section className="px-5 sm:px-8 lg:px-12 py-16 md:py-24 max-w-5xl mx-auto">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-        >
-          {/* Cabeçalho da seção */}
-          <motion.div variants={fadeInUp} className="section-label">
-            <span>Publicações</span>
-          </motion.div>
-
-          <motion.h2
-            variants={fadeInUp}
-            className="text-2xl sm:text-3xl font-bold mt-4"
-            style={{ color: "var(--text-primary)" }}
+      {tcc.articles.length > 0 && (
+        <section className="px-5 sm:px-8 lg:px-12 py-16 md:py-24 max-w-5xl mx-auto">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
           >
-            Artigos Publicados
-          </motion.h2>
+            {/* Cabeçalho da seção */}
+            <motion.div variants={fadeInUp} className="section-label">
+              <span>Publicações</span>
+            </motion.div>
 
-          {/* Lista de artigos ou estado vazio */}
-          {hasArticles ? (
+            <motion.h2
+              variants={fadeInUp}
+              className="text-2xl sm:text-3xl font-bold mt-4"
+              style={{ color: "var(--text-primary)" }}
+            >
+              Artigos Publicados
+            </motion.h2>
+
+            {/* Lista de artigos */}
             <motion.div
               variants={staggerFast}
               initial="hidden"
@@ -194,7 +193,7 @@ export default function TCCSection() {
               viewport={{ once: true }}
               className="mt-8 flex flex-col gap-3"
             >
-              {tcc.articles.map((article) => (
+              {(tcc.articles as { title: string; venue: string; year: string; url: string }[]).map((article) => (
                 <motion.a
                   key={article.url}
                   variants={fadeInUp}
@@ -234,17 +233,9 @@ export default function TCCSection() {
                 </motion.a>
               ))}
             </motion.div>
-          ) : (
-            <motion.p
-              variants={fadeInUp}
-              className="mt-6 text-sm italic"
-              style={{ color: "var(--text-muted)" }}
-            >
-              Nenhum artigo publicado ainda — em breve.
-            </motion.p>
-          )}
-        </motion.div>
-      </section>
+          </motion.div>
+        </section>
+      )}
 
       <footer className="py-16 px-5 text-center">
         <p className="text-xs" style={{ color: "var(--text-muted)" }}>
