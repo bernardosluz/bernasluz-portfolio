@@ -289,7 +289,7 @@ export default function ProjectsCarousel() {
                       {project.description}
                     </p>
 
-                    <div className="mt-4 flex flex-wrap gap-1.5">
+                    <div className="mt-4 flex flex-wrap">
                       {project.tech.map((tech, techIdx) => (
                         <span key={`${tech}-${techIdx}`} className="badge-tech">
                           {tech}

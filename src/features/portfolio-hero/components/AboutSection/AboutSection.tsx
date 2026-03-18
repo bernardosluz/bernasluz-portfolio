@@ -127,12 +127,7 @@ export default function AboutSection() {
         </motion.div>
 
           <div className="btn-primary hidden"></div>
-        <motion.div className="mt-32">
-          {/*
-    motion.div é block-level → mt-10 (40px) cria espaço real no fluxo do layout
-    O <a> abaixo não precisa mais de margem, só estiliza o botão
-    Separar espaçamento de estilo é a forma profissional de evitar esse bug
-  */}
+        <motion.div>
           <a
             href={playlist.playlistUrl}
             target="_blank"

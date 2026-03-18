@@ -69,10 +69,10 @@ export const siteConfig = {
     subtitle: "Subtítulo ou descrição breve",
     institution: "Universidade Federal de Sergipe",
     year: 2026,
-    advisor: "Prof. Dr. Nome do Orientador",
+    advisor: "Prof. Dr. Breno Piva",
     abstract:
-      "Resumo do trabalho de conclusão de curso. Descreva brevemente o escopo, objetivo e principais contribuições.",
-    keywords: ["palavra-chave-1", "palavra-chave-2", "palavra-chave-3"],
+      "Resumo do trabalho de conclusão de curso.",
+    keywords: ["NP-Hard", "School Timetabling Problem", "Scheduling Problem", "Integer Programming"],
     articles: [],
   },
 };
