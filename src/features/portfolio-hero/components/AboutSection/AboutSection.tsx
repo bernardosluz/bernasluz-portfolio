@@ -1,13 +1,6 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 // ABOUT SECTION — Seção "Sobre Mim"
 // ═══════════════════════════════════════════════════════════════════════════════
-//
-// MUDANÇAS:
-// 1. Usa .section-label do globals.css (antes era markup manual)
-// 2. Usa .badge do globals.css (antes era style inline)
-// 3. Badges animam individualmente com staggerFast (mais fluido)
-// 4. Padding responsivo melhorado para mobile
-// 5. Texto secundário com line-height mais confortável
 
 "use client";
 
@@ -31,8 +24,8 @@ export default function AboutSection() {
         whileInView="visible"
         // whileInView = anima quando entra na viewport (lazy animation)
         viewport={{ once: true, margin: "-80px" }}
-        // once: true = anima só 1 vez (não repete ao scrollar de volta)
-        // margin: "-80px" = dispara 80px antes de realmente aparecer
+      // once: true = anima só 1 vez (não repete ao scrollar de volta)
+      // margin: "-80px" = dispara 80px antes de realmente aparecer
       >
         {/* Label — usa classe modular .section-label */}
         <motion.div variants={fadeInUp} className="section-label">
@@ -71,8 +64,8 @@ export default function AboutSection() {
               key={skill}
               variants={fadeInUp}
               className="badge"
-              // .badge é a classe modular do globals.css
-              // Já tem padding, border-radius, cores do tema, hover, tudo pronto
+            // .badge é a classe modular do globals.css
+            // Já tem padding, border-radius, cores do tema, hover, tudo pronto
             >
               {skill}
             </motion.span>
@@ -95,7 +88,7 @@ export default function AboutSection() {
         >
           {playlist.description}
         </motion.p>
-        
+
         {/* Gêneros — cada badge anima individualmente */}
         <motion.div
           variants={staggerFast}
@@ -109,8 +102,8 @@ export default function AboutSection() {
               key={genre}
               variants={fadeInUp}
               className="badge"
-              // .badge é a classe modular do globals.css
-              // Já tem padding, border-radius, cores do tema, hover, tudo pronto
+            // .badge é a classe modular do globals.css
+            // Já tem padding, border-radius, cores do tema, hover, tudo pronto
             >
               {genre}
             </motion.span>
@@ -119,8 +112,8 @@ export default function AboutSection() {
 
         <motion.div
           variants={fadeInUp}
-          className="mt-6 overflow-hidden rounded-xl border flex items-center justify-center md:px-10 md:py-10 lg:px-14 lg:py-12"
-          style={{ borderColor: "var(--border)", backgroundColor: "var(--accent)" }}
+          className="mt-6 overflow-hidden rounded-xl border flex items-center justify-center md:px-10 md:py-10 lg:px-14 lg:py-16"
+          style={{ borderColor: "var(--border)", backgroundColor: "var(--accent-hover)" }}
         >
           <iframe
             src={playlist.videoEmbedUrl}
@@ -133,15 +126,22 @@ export default function AboutSection() {
           />
         </motion.div>
 
-        <motion.a
-          variants={fadeInUp}
-          href={playlist.playlistUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-primary mt-6"
-        >
-          Abrir playlist completa
-        </motion.a>
+          <div className="btn-primary hidden"></div>
+        <motion.div className="mt-32">
+          {/*
+    motion.div é block-level → mt-10 (40px) cria espaço real no fluxo do layout
+    O <a> abaixo não precisa mais de margem, só estiliza o botão
+    Separar espaçamento de estilo é a forma profissional de evitar esse bug
+  */}
+          <a
+            href={playlist.playlistUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary-hover"
+          >
+            Abrir playlist completa
+          </a>
+        </motion.div>
       </motion.div>
     </section>
   );

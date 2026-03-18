@@ -58,7 +58,7 @@ export default function BannerHero() {
       <div
         className="relative w-full h-[65svh] md:h-auto md:max-w-[600px] md:mx-auto md:px-8 overflow-hidden md:rounded-2xl flex items-center justify-center"
         style={{
-          backgroundColor: "var(--accent)",
+          backgroundColor: "var(--accent-hover)",
           aspectRatio: "16 / 20",
         }}
         // Mobile: full width, altura 65svh
