@@ -239,7 +239,7 @@ export default function TCCSection() {
 
       <footer className="py-16 px-5 text-center">
         <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-          © 2025 Bernardo Luz — Next.js + Framer Motion
+          © Bernardo Luz
         </p>
       </footer>
     </main>
