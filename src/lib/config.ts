@@ -9,14 +9,16 @@
 
 export const siteConfig = {
   name: "Bernardo Luz",
-  role: "Engenheiro de Computação",
+  role: "Engenheiria de Computação",
   location: "Aracaju, SE",
   university: "UFS",
   bio: "Desenvolvedor Fullstack apaixonado por criar experiências digitais.",
   about:
     "Estudante de Engenharia de Computação na UFS, com foco em desenvolvimento Fullstack. " +
-    "Tenho experiência com React, Next.js, .NET Core e estou sempre buscando " +
-    "aprender novas tecnologias e boas práticas de desenvolvimento.",
+    "Atualmente sou estagiário na Diretóriria da Tecnoligia de Informação da SSP-SE, " +
+    "tendo atuado anteriormente como estagiário no Instituto de Criminalística da SSP-SE. " +
+    "Tenho experiência com React, Next.js, .NET Core e estou sempre buscando aprender novas tecnologias e " + 
+    "boas práticas de desenvolvimento.",
   links: {
     github: "https://github.com/bernardosluz",
     linkedin: "https://www.linkedin.com/in/bernardo-silva-luz-740979248/",
