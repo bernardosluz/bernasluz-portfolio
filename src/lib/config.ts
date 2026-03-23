@@ -9,7 +9,7 @@
 
 export const siteConfig = {
   name: "Bernardo Luz",
-  role: "Engenheiria de Computação",
+  role: "Engenharia de Computação",
   location: "Aracaju, SE",
   university: "UFS",
   bio: "Desenvolvedor Fullstack apaixonado por criar experiências digitais.",
