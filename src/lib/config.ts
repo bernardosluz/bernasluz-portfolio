@@ -53,7 +53,7 @@ export const siteConfig = {
     },
     {
       title: "Assembly Image Decoder",
-      image: "",
+      image: "/imagens/imagem_assembly_image_decoder.png",
       description:
         "Decodificador e renderizador de arte ASCII em Assembly x86-64, processando formato de imagem customizado com paleta de caracteres e compressão Run-Length Encoding para gerar saídas textuais a partir de dados comprimidos.",
       tech: ["Assembly", "x86-64", "RLE", "Low-Level"],
