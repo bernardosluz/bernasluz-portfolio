@@ -51,24 +51,38 @@ export default function Projects() {
               variants={scaleIn}
               className={`card group ${i === 0 ? "md:col-span-2" : ""}`}
             >
-              {/* Gradient cover */}
-              <div
-                className="relative h-36 md:h-44 overflow-hidden"
-                style={{
-                  background: `linear-gradient(135deg, var(--bg-elevated), var(--bg-card))`,
-                }}
-              >
-                {/* Decorative elements */}
+              {/* Cover */}
+              <div className="relative h-36 md:h-44 overflow-hidden">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(135deg, var(--bg-elevated), var(--bg-card))`,
+                    }}
+                  />
+                )}
+                {/* Hover overlay */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                   style={{
                     background: `radial-gradient(circle at 30% 50%, var(--accent-glow), transparent 60%)`,
                   }}
                 />
+                {/* Number overlay */}
                 <div className="absolute bottom-4 left-6 right-6 flex items-end justify-between">
                   <span
-                    className="text-6xl font-bold opacity-10"
-                    style={{ color: "var(--accent)" }}
+                    className="text-6xl font-bold"
+                    style={{
+                      color: project.image ? "white" : "var(--accent)",
+                      opacity: project.image ? 0.25 : 0.1,
+                    }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
