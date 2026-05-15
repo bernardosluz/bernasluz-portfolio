@@ -1,23 +1,15 @@
-// ═══════════════════════════════════════════════════════════════════════════════
-// CONFIG.TS — Dados centralizados do site
-// ═══════════════════════════════════════════════════════════════════════════════
-//
-// POR QUE CENTRALIZAR?
-// Se o nome, bio ou link mudar, você altera SÓ AQUI.
-// Todos os componentes que usam siteConfig pegam automaticamente.
-// Sem config centralizado, você teria que caçar strings espalhadas pelo projeto.
-
 export const siteConfig = {
   name: "Bernardo Luz",
-  role: "Engenharia de Computação",
+  role: "Fullstack Developer",
+  tagline: "Engenharia de Computação",
   location: "Aracaju, SE",
   university: "UFS",
-  bio: "Desenvolvedor Fullstack apaixonado por criar experiências digitais.",
+  bio: "Criando experiências digitais com código limpo e design intencional.",
   about:
     "Estudante de Engenharia de Computação na UFS, com foco em desenvolvimento Fullstack. " +
-    "Atualmente sou estagiário na Diretóriria da Tecnoligia de Informação da SSP-SE, " +
-    "tendo atuado anteriormente como estagiário no Instituto de Criminalística da SSP-SE. " +
-    "Tenho experiência com React, Next.js, .NET Core e estou sempre buscando aprender novas tecnologias e " + 
+    "Atualmente sou estagiário na Diretoria da Tecnologia de Informação da SSP-SE, " +
+    "tendo atuado anteriormente no Instituto de Criminalística da SSP-SE. " +
+    "Tenho experiência com React, Next.js, .NET Core e estou sempre buscando aprender novas tecnologias e " +
     "boas práticas de desenvolvimento.",
   links: {
     github: "https://github.com/bernardosluz",
@@ -26,45 +18,72 @@ export const siteConfig = {
     youtube: "https://www.youtube.com/@bernasluz",
     email: "mailto:contato@bernasluz.com.br",
   },
-  studyPlaylist: {
-    title: "Playlist de Música",
-    description:
-      "Uma seleção pessoal para estudar, trabalhar e manter o foco ao longo do dia.",
-    videoEmbedUrl:
-      "https://www.youtube.com/embed/videoseries?list=PL2ftnQDAfvNVN53sz0PGBkHRrKsXufzxD",
-    playlistUrl: "https://www.youtube.com/playlist?list=PL2ftnQDAfvNVN53sz0PGBkHRrKsXufzxD",
-    genres: ["Lofi", "Instrumental", "Clássica"],
-  },
-  projects: [
+  experience: [
     {
-      title: "Lojinha API",
-      description:
-        "API RESTful completa para e-commerce com autenticação JWT e gerenciamento de produtos.",
-      tech: [".NET Core", "C#", "SQL Server", "JWT"],
-      github: "https://github.com/bernardosluz",
-      image: "",
+      role: "Estagiário — Diretoria de TI",
+      company: "SSP-SE",
+      period: "Atual",
+      description: "Desenvolvimento de sistemas internos e manutenção de infraestrutura tecnológica.",
     },
     {
-      title: "uHouse-web",
-      description:
-        "Plataforma web para gerenciamento de casas inteligentes com interface responsiva.",
-      tech: ["React", "TypeScript", "Tailwind", "API REST"],
-      github: "https://github.com/bernardosluz",
+      role: "Estagiário — Instituto de Criminalística",
+      company: "SSP-SE",
+      period: "Anterior",
+      description: "Suporte técnico e desenvolvimento de soluções digitais para perícia.",
+    },
+  ],
+  projects: [
+    {
+      title: "Simple JIT VM",
       image: "",
+      description:
+        "Máquina virtual customizada com 16 registradores, 256 bytes de memória e conjunto próprio de instruções, capaz de traduzir bytecode para código de máquina x86-64 em tempo de execução, utilizando compilação JIT, cache de instruções e arquitetura de computadores.",
+      tech: ["C", "x86-64", "JIT Compiler", "Assembly"],
+      github: "",
+      link: "",
+    },
+    {
+      title: "FloorPlan Element Detection",
+      image: "",
+      description:
+        "Detecção e segmentação de elementos arquitetônicos em plantas baixas, utilizando binarização, morfologia matemática, filtro de Sobel, Transformada de Hough e validação cruzada geométrica para identificação de portas, paredes e estruturas.",
+      tech: ["Python", "OpenCV", "NumPy", "Processamento de Imagens"],
+      github: "https://github.com/bernardosluz/FloorPlan-Element-Detection",
+      link: "",
+    },
+    {
+      title: "Assembly Image Decoder",
+      image: "",
+      description:
+        "Decodificador e renderizador de arte ASCII em Assembly x86-64, processando formato de imagem customizado com paleta de caracteres e compressão Run-Length Encoding para gerar saídas textuais a partir de dados comprimidos.",
+      tech: ["Assembly", "x86-64", "RLE", "Low-Level"],
+      github: "",
+      link: "",
+    },
+    {
+      title: "SADA-ATA",
+      image: "",
+      description:
+        "Sistema automático de download e análise de atas com interface web, automatizando a coleta e processamento de documentos públicos.",
+      tech: ["JavaScript", "HTML", "CSS", "Node.js"],
+      github: "https://github.com/bernardosluz/Sistema-Automatico-de-Download-e-Analise-de-Atas",
+      link: "",
     },
     {
       title: "Portfólio Pessoal",
-      description:
-        "Este site! Construído com Next.js, Framer Motion e Tailwind CSS.",
-      tech: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
-      github: "https://github.com/bernardosluz",
       image: "",
+      description:
+        "Este site — construído com Next.js, Framer Motion e Tailwind CSS com design premium e transições suaves.",
+      tech: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
+      github: "https://github.com/bernardosluz/bernasluz-portfolio",
+      link: "",
     },
   ],
   skills: {
     frontend: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS"],
-    backend: [".NET Core", "C#", "Node.js", "SQL Server"],
-    tools: ["Git", "VS Code", "Figma", "Docker"],
+    backend: [".NET Core", "C#", "Node.js", "SQL Server", "Java", "Spring Boot"],
+    tools: ["Git", "VS Code", "Figma", "Docker", "Linux"],
+    lowLevel: ["C", "Assembly x86-64", "JIT Compilation", "OpenCV", "Python"],
   },
   tcc: {
     title: "Título do TCC",
@@ -72,9 +91,15 @@ export const siteConfig = {
     institution: "Universidade Federal de Sergipe",
     year: 2026,
     advisor: "Prof. Dr. Breno Piva",
-    abstract:
-      "Resumo do trabalho de conclusão de curso.",
+    abstract: "Resumo do trabalho de conclusão de curso.",
     keywords: ["NP-Hard", "School Timetabling Problem", "Scheduling Problem", "Integer Programming"],
     articles: [],
   },
+  nav: [
+    { label: "Início", href: "#hero" },
+    { label: "Sobre", href: "#about" },
+    { label: "Projetos", href: "#projects" },
+    { label: "Skills", href: "#skills" },
+    { label: "Contato", href: "#contact" },
+  ],
 };
