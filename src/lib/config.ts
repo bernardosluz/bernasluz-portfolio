@@ -29,7 +29,7 @@ export const siteConfig = {
       role: "Estagiário — Instituto de Criminalística",
       company: "SSP-SE",
       period: "Anterior",
-      description: "Suporte técnico e desenvolvimento de soluções digitais para perícia.",
+      description: "Suporte direto à Diretoria em processos de licitação, organização de informações e rotinas institucionais.",
     },
   ],
   projects: [
