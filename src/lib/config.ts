@@ -16,7 +16,7 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/bernardo-silva-luz-740979248/",
     instagram: "https://www.instagram.com/bernasluz",
     youtube: "https://www.youtube.com/@bernasluz",
-    email: "mailto:contato@bernasluz.com.br",
+    // email: "mailto:contato@bernasluz.com.br",
   },
   experience: [
     {
@@ -35,7 +35,7 @@ export const siteConfig = {
   projects: [
     {
       title: "Simple JIT VM",
-      image: "",
+      image: "/imagens/imagem_simple_jit_vm.png",
       description:
         "Máquina virtual customizada com 16 registradores, 256 bytes de memória e conjunto próprio de instruções, capaz de traduzir bytecode para código de máquina x86-64 em tempo de execução, utilizando compilação JIT, cache de instruções e arquitetura de computadores.",
       tech: ["C", "x86-64", "JIT Compiler", "Assembly"],
@@ -44,7 +44,7 @@ export const siteConfig = {
     },
     {
       title: "FloorPlan Element Detection",
-      image: "",
+      image: "/imagens/imagem_floorplan_element_detection.png",
       description:
         "Detecção e segmentação de elementos arquitetônicos em plantas baixas, utilizando binarização, morfologia matemática, filtro de Sobel, Transformada de Hough e validação cruzada geométrica para identificação de portas, paredes e estruturas.",
       tech: ["Python", "OpenCV", "NumPy", "Processamento de Imagens"],
@@ -62,7 +62,7 @@ export const siteConfig = {
     },
     {
       title: "SADA-ATA",
-      image: "",
+      image: "/imagens/imagem_sada_ata.png",
       description:
         "Sistema automático de download e análise de atas com interface web, automatizando a coleta e processamento de documentos públicos.",
       tech: ["JavaScript", "HTML", "CSS", "Node.js"],
@@ -71,7 +71,7 @@ export const siteConfig = {
     },
     {
       title: "Portfólio Pessoal",
-      image: "",
+      image: "/imagens/imagem_portfolio_pessoal.png",
       description:
         "Este site — construído com Next.js, Framer Motion e Tailwind CSS com design premium e transições suaves.",
       tech: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],

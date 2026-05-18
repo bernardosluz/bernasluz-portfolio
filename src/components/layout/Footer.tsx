@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Instagram, Youtube, Mail } from "lucide-react";
+import { Github, Linkedin, Instagram, Youtube /*, Mail */ } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
@@ -10,7 +10,7 @@ const socialLinks = [
   { href: siteConfig.links.linkedin, icon: Linkedin, label: "LinkedIn" },
   { href: siteConfig.links.instagram, icon: Instagram, label: "Instagram" },
   { href: siteConfig.links.youtube, icon: Youtube, label: "YouTube" },
-  { href: siteConfig.links.email, icon: Mail, label: "Email" },
+  /*{ href: siteConfig.links.email, icon: Mail, label: "Email" }, */
 ];
 
 export default function Footer() {
