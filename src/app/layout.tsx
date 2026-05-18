@@ -1,33 +1,31 @@
-// ═══════════════════════════════════════════════════════════════════════════════
-// LAYOUT.TSX — Esqueleto de todas as páginas
-// ═══════════════════════════════════════════════════════════════════════════════
-// O layout.tsx define a estrutura que ENVOLVE todas as páginas.
-// Quando você navega, o layout NÃO recarrega — só o {children} muda.
-
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import "./globals.css";
-import Sidebar from "@/features/portfolio-hero/components/Sidebar/Sidebar";
 import ThemeProvider from "@/hooks/ThemeProvider";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Bernardo Luz | Portfólio",
-  description: "Portfólio pessoal de Bernardo Luz - Engenheiro de Computação",
+  description: "Portfólio pessoal de Bernardo Luz — Fullstack Developer & Engenheiro de Computação",
 };
 
-interface RootLayoutProps {
-  children: ReactNode;
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    // suppressHydrationWarning → o servidor não sabe o tema do localStorage,
-    // então o HTML inicial pode diferir do client. Esse atributo silencia o aviso.
     <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body suppressHydrationWarning>
         <ThemeProvider>
-          <Sidebar />
+          <Navbar />
           <main>{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
